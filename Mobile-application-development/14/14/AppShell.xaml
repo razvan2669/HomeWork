@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="_14.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:_14"
+    Title="Задание 14">
+
+    <TabBar>
+        <Tab Title="Напитки" Icon="dotnet_bot.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:DrinksPage}"
+                Route="DrinksPage" />
+        </Tab>
+        <Tab Title="Песни" Icon="dotnet_bot.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:SongsPage}"
+                Route="SongsPage" />
+        </Tab>
+    </TabBar>
+
+</Shell>

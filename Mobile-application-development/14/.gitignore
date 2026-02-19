@@ -1,0 +1,16 @@
+# Visual Studio (папка .vs — кэш, индексы; не коммитить, часто "Permission denied")
+.vs/
+
+# Сборки
+bin/
+obj/
+
+# Файлы пользователя IDE (настройки локальной машины)
+*.csproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Файлы индекса Visual Studio (источник ошибки "Permission denied")
+*.vsidx

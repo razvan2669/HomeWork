@@ -1,0 +1,12 @@
+# Папки Visual Studio (кэш, индексы — часто "Permission denied" при коммите)
+**/.vs/
+
+# Сборки .NET/MAUI
+**/bin/
+**/obj/
+
+# Файлы пользователя IDE
+*.csproj.user
+*.suo
+*.user
+*.vsidx

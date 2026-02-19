@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_14.DrinksPage"
+             Title="Напитки">
+
+    <Grid RowDefinitions="Auto,*" Padding="20">
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+            <Label Text="Список напитков" FontSize="Title" FontAttributes="Bold" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button x:Name="BtnAddDrink" Text="Добавить напиток" Clicked="OnAddDrinkClicked" />
+                <Button x:Name="BtnRemoveDrink" Grid.Column="1" Text="Удалить выбранный" Clicked="OnRemoveDrinkClicked" />
+            </Grid>
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="15">
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Напитки:" FontAttributes="Bold" />
+                <CollectionView x:Name="DrinksList"
+                                SelectionMode="Single"
+                                SelectionChanged="OnDrinkSelected">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="10" Margin="0,4" Stroke="Gray" StrokeThickness="1">
+                                <Label Text="{Binding DisplayText}" LineBreakMode="WordWrap" />
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Информация о напитке:" FontAttributes="Bold" />
+                <ScrollView>
+                    <Label x:Name="LblDrinkInfo"
+                           Text="Выберите напиток из списка"
+                           LineBreakMode="WordWrap"
+                           Padding="8" />
+                </ScrollView>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
