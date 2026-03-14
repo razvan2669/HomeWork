@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_16.Task3Page"
+             Title="Задание 3">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="20">
+            <!-- Заголовок -->
+            <Border BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}"
+                    Stroke="{StaticResource Primary}"
+                    StrokeThickness="2"
+                    Padding="16"
+                    Margin="0,0,0,10">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Угол броска тела"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="α = arcsin(gT / 2V)"
+                           FontSize="18"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{StaticResource Tertiary}" />
+                    <Label Text="g = 9.8 м/с²"
+                           FontSize="14"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{StaticResource Gray500}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Начальная скорость V -->
+            <Border Stroke="{StaticResource Gray300}"
+                    StrokeThickness="1"
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Начальная скорость V (м/с):"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Entry x:Name="EntryV"
+                           Placeholder="Например: 20"
+                           Keyboard="Numeric"
+                           FontSize="18" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Время полёта T -->
+            <Border Stroke="{StaticResource Gray300}"
+                    StrokeThickness="1"
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Время полёта T (с):"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Entry x:Name="EntryT"
+                           Placeholder="Например: 3.5"
+                           Keyboard="Numeric"
+                           FontSize="18" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Кнопка вычисления -->
+            <Button x:Name="CalculateButton"
+                    Text="Вычислить угол α"
+                    Clicked="OnCalculateClicked"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    HeightRequest="50"
+                    CornerRadius="12" />
+
+            <!-- Результат -->
+            <Border x:Name="ResultBorder"
+                    IsVisible="False"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}"
+                    Stroke="{StaticResource Primary}"
+                    StrokeThickness="2"
+                    Padding="20"
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="8">
+                    <Label x:Name="ResultLabel"
+                           Text=""
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" />
+                    <Label x:Name="DetailLabel"
+                           Text=""
+                           FontSize="14"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

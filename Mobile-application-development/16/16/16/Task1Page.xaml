@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_16.Task1Page"
+             Title="Задание 1">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            
+            <Border Stroke="{StaticResource Primary}"
+                    StrokeThickness="2"
+                    Padding="15"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}"
+                    StrokeShape="RoundRectangle 10">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Найти значение Y"
+                           Style="{StaticResource Headline}"
+                           FontSize="22" />
+                    <Label Text="Y = X₁ + X₂ + ... + Xₙ"
+                           FontSize="16"
+                           TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+                    <Label Text="X = Z³ - B + A²/tg²φ"
+                           FontSize="14"
+                           TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Количество значений X (n):"
+                   FontAttributes="Bold" />
+            <Entry x:Name="CountEntry"
+                   Keyboard="Numeric"
+                   Placeholder="Введите число n"
+                   PlaceholderColor="{StaticResource Gray400}" />
+
+            <Button x:Name="CreateFormBtn"
+                    Text="Создать поля ввода"
+                    Clicked="OnCreateFormClicked"
+                    BackgroundColor="{StaticResource Primary}" />
+
+            <Border x:Name="InputsBorder"
+                    Stroke="{StaticResource Gray300}"
+                    StrokeThickness="1"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 8"
+                    IsVisible="False">
+                <VerticalStackLayout x:Name="InputsContainer" Spacing="12" />
+            </Border>
+
+            <Button x:Name="CalculateBtn"
+                    Text="Вычислить Y"
+                    Clicked="OnCalculateClicked"
+                    IsVisible="False"
+                    BackgroundColor="{StaticResource Tertiary}" />
+
+            <Border x:Name="ResultBorder"
+                    Stroke="{StaticResource Secondary}"
+                    StrokeThickness="2"
+                    Padding="20"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray950}}"
+                    StrokeShape="RoundRectangle 10"
+                    IsVisible="False">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Результат:"
+                           FontAttributes="Bold"
+                           FontSize="18" />
+                    <Label x:Name="ResultLabel"
+                           FontSize="24"
+                           TextColor="{StaticResource Primary}" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_16.Task2Page"
+             Title="Задание 2">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="20">
+            <!-- Заголовок -->
+            <Border BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}"
+                    Stroke="{StaticResource Primary}"
+                    StrokeThickness="2"
+                    Padding="16"
+                    Margin="0,0,0,10">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Алгебраическая сумма"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="1^k + 2^k + 3^k + ... + N^k"
+                           FontSize="18"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{StaticResource Tertiary}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Ввод N -->
+            <Border Stroke="{StaticResource Gray300}"
+                    StrokeThickness="1"
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Введите N (верхний предел суммы):"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Entry x:Name="EntryN"
+                           Placeholder="Например: 10"
+                           Keyboard="Numeric"
+                           FontSize="18" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Ввод k -->
+            <Border Stroke="{StaticResource Gray300}"
+                    StrokeThickness="1"
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Введите степень k:"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Entry x:Name="EntryK"
+                           Placeholder="Например: 2"
+                           Keyboard="Numeric"
+                           FontSize="18" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Кнопка вычисления -->
+            <Button x:Name="CalculateButton"
+                    Text="Вычислить сумму"
+                    Clicked="OnCalculateClicked"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    HeightRequest="50"
+                    CornerRadius="12" />
+
+            <!-- Результат -->
+            <Border x:Name="ResultBorder"
+                    IsVisible="False"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}"
+                    Stroke="{StaticResource Primary}"
+                    StrokeThickness="2"
+                    Padding="20"
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="8">
+                    <Label x:Name="ResultLabel"
+                           Text=""
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" />
+                    <Label x:Name="DetailLabel"
+                           Text=""
+                           FontSize="14"
+                           HorizontalTextAlignment="Center"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
