@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_19.Pages.ProductDetailPage"
+             Title="Товар"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+
+    <ScrollView>
+        <Grid>
+            <VerticalStackLayout x:Name="ContentStack"
+                                 Padding="24"
+                                 Spacing="24"
+                                 IsVisible="False">
+                <Border Stroke="{StaticResource Primary}"
+                        StrokeThickness="2"
+                        Padding="28"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                        StrokeShape="RoundRectangle 24">
+                    <Border.Shadow>
+                        <Shadow Brush="{StaticResource Gray400}" Offset="0,8" Radius="20" Opacity="0.18" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="20">
+                        <Label x:Name="ProductImage"
+                               FontSize="100" 
+                               HorizontalOptions="Center" />
+                        <Label x:Name="ProductName" 
+                               FontSize="26" FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               LineBreakMode="WordWrap" />
+                        <Label x:Name="ProductDescription" 
+                               FontSize="16"
+                               TextColor="{StaticResource Gray500}"
+                               LineBreakMode="WordWrap" />
+                        <Label x:Name="ProductPrice" 
+                               FontSize="32" FontAttributes="Bold"
+                               TextColor="{StaticResource Accent}"
+                               HorizontalOptions="Center" />
+                        <Label x:Name="ProductCategory" 
+                               FontSize="14"
+                               TextColor="{StaticResource Gray400}"
+                               HorizontalOptions="Center" />
+                        <Label x:Name="StockLabel" 
+                               FontSize="15"
+                               TextColor="{StaticResource Accent}"
+                               HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <ActivityIndicator x:Name="Loader"
+                               IsRunning="True"
+                               IsVisible="True"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               Color="{StaticResource Primary}"
+                               HeightRequest="60"
+                               WidthRequest="60" />
+
+            <!-- Пустое состояние (вкладка без выбранного товара) -->
+            <VerticalStackLayout x:Name="EmptyState"
+                                IsVisible="True"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Spacing="20"
+                                Padding="40">
+                <Label Text="📦" FontSize="80" HorizontalOptions="Center" />
+                <Label Text="Страница товара (Задание № 5)" 
+                       FontSize="22" FontAttributes="Bold" 
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource Gray600}" />
+                <Label Text="Перейдите во вкладку «Магазин» и нажмите «Подробнее» на любом товаре" 
+                       FontSize="14" 
+                       TextColor="{StaticResource Gray500}"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

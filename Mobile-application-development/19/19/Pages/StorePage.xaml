@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:_19.Models"
+             x:Class="_19.Pages.StorePage"
+             x:Name="StorePageRoot"
+             Title="Магазин"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+
+    <Grid RowDefinitions="Auto,*" Padding="0">
+        <Border Grid.Row="0" 
+                BackgroundColor="{StaticResource Accent}"
+                Padding="24,20"
+                StrokeThickness="0">
+            <VerticalStackLayout Spacing="6">
+                <Label Text="🛒 Задание № 4" 
+                       FontSize="28" FontAttributes="Bold" 
+                       TextColor="White" />
+                <Label Text="Главная страница магазина" 
+                       FontSize="14" TextColor="#E8E8E8" />
+                <Border Margin="0,12,0,0"
+                        BackgroundColor="#40FFFFFF"
+                        Padding="12,10"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10">
+                    <Entry x:Name="SearchEntry"
+                           Placeholder="Поиск..."
+                           TextColor="White"
+                           PlaceholderColor="#BBFFFFFF"
+                           BackgroundColor="Transparent"
+                           FontSize="16"
+                           TextChanged="OnSearchChanged" />
+                </Border>
+            </VerticalStackLayout>
+        </Border>
+
+        <CollectionView x:Name="ProductsList"
+                        Grid.Row="1"
+                        SelectionMode="Single"
+                        SelectionChanged="OnProductSelected"
+                        Margin="16,12,16,16">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="2"
+                                 HorizontalItemSpacing="12"
+                                 VerticalItemSpacing="12" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ProductDisplayModel">
+                    <Border Stroke="{StaticResource Gray300}"
+                            StrokeThickness="1"
+                            Padding="0"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                            StrokeShape="RoundRectangle 16">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Gray400}"
+                                    Offset="0,4"
+                                    Radius="12"
+                                    Opacity="0.2" />
+                        </Border.Shadow>
+                        <Grid RowDefinitions="Auto,*,Auto" Padding="16">
+                            <Label Grid.Row="0" 
+                                   Text="{Binding ImageUrl}" 
+                                   FontSize="48" 
+                                   HorizontalOptions="Center"
+                                   Margin="0,12,0,8" />
+                            <VerticalStackLayout Grid.Row="1" Spacing="6">
+                                <Label Text="{Binding Name}" 
+                                       FontSize="15" FontAttributes="Bold"
+                                       MaxLines="2" LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding Description}" 
+                                       FontSize="12"
+                                       TextColor="{StaticResource Gray500}"
+                                       MaxLines="2" LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding FormattedPrice}" 
+                                       TextColor="{StaticResource Accent}"
+                                       FontSize="18" FontAttributes="Bold" />
+                                <Label Text="{Binding Category}" 
+                                       FontSize="11"
+                                       TextColor="{StaticResource Gray500}" />
+                            </VerticalStackLayout>
+                            <Button Grid.Row="2"
+                                    Text="Подробнее →"
+                                    BackgroundColor="{StaticResource Primary}"
+                                    TextColor="White"
+                                    FontSize="14"
+                                    Padding="0,12"
+                                    Margin="0,12,0,0"
+                                    Clicked="OnDetailsClicked" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

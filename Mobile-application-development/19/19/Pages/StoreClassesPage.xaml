@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_19.Pages.StoreClassesPage"
+             Title="Классы магазина"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+
+    <Grid RowDefinitions="Auto,*" Padding="0">
+        <Border Grid.Row="0" 
+                BackgroundColor="{StaticResource Tertiary}"
+                Padding="24,20"
+                StrokeThickness="0">
+            <VerticalStackLayout Spacing="6">
+                <Label Text="📦 Задание № 2" 
+                       FontSize="28" FontAttributes="Bold" 
+                       TextColor="White" />
+                <Label Text="Классы для приложения интернет-магазина" 
+                       FontSize="14" TextColor="#E8E8E8" />
+            </VerticalStackLayout>
+        </Border>
+
+        <ScrollView Grid.Row="1" Padding="20">
+            <VerticalStackLayout Spacing="16">
+                <Border Stroke="{StaticResource Tertiary}"
+                        StrokeThickness="2"
+                        Padding="20"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                        StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Product" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Accent}" />
+                        <Label Text="Id, Name, Description, Price, ImageUrl, Category, StockQuantity" 
+                               FontSize="13" TextColor="{StaticResource Gray500}" LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Stroke="{StaticResource Tertiary}"
+                        StrokeThickness="2"
+                        Padding="20"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                        StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Category" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Accent}" />
+                        <Label Text="Id, Name, Description" FontSize="13" TextColor="{StaticResource Gray500}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Stroke="{StaticResource Tertiary}"
+                        StrokeThickness="2"
+                        Padding="20"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                        StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="CartItem" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Accent}" />
+                        <Label Text="ProductId, Quantity" FontSize="13" TextColor="{StaticResource Gray500}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Stroke="{StaticResource Tertiary}"
+                        StrokeThickness="2"
+                        Padding="20"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                        StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="StoreService" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Accent}" />
+                        <Label Text="GetAllProducts(), GetProductById(id)" FontSize="13" TextColor="{StaticResource Gray500}" LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

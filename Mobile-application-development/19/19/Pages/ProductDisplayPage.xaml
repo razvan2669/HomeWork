@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_19.Pages.ProductDisplayPage"
+             Title="Класс отображения"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+
+    <Grid RowDefinitions="Auto,*" Padding="0">
+        <Border Grid.Row="0" 
+                BackgroundColor="{StaticResource Accent}"
+                Padding="24,20"
+                StrokeThickness="0">
+            <VerticalStackLayout Spacing="6">
+                <Label Text="🖼️ Задание № 3" 
+                       FontSize="28" FontAttributes="Bold" 
+                       TextColor="White" />
+                <Label Text="Класс для отображения товара" 
+                       FontSize="14" TextColor="#E8E8E8" />
+            </VerticalStackLayout>
+        </Border>
+
+        <ScrollView Grid.Row="1" Padding="20">
+            <Border Stroke="{StaticResource Accent}"
+                    StrokeThickness="2"
+                    Padding="24"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                    StrokeShape="RoundRectangle 20">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray400}" Offset="0,6" Radius="16" Opacity="0.15" />
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="ProductDisplayModel" 
+                           FontSize="22" FontAttributes="Bold" 
+                           TextColor="{StaticResource Accent}"
+                           HorizontalOptions="Center" />
+                    <BoxView HeightRequest="1" Color="{StaticResource Gray300}" />
+                    <Label Text="Свойства:" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Gray600}" />
+                    <Label Text="• Id, Name, Description, Price" FontSize="14" TextColor="{StaticResource Gray500}" />
+                    <Label Text="• ImageUrl, Category, StockQuantity" FontSize="14" TextColor="{StaticResource Gray500}" />
+                    <Label Text="• InStock (вычисляемое)" FontSize="14" TextColor="{StaticResource Gray500}" />
+                    <Label Text="• FormattedPrice (форматированная цена)" FontSize="14" TextColor="{StaticResource Gray500}" />
+                    <BoxView HeightRequest="1" Color="{StaticResource Gray300}" />
+                    <Label Text="Метод FromProduct(Product):" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Gray600}" />
+                    <Label Text="Преобразует Product в ProductDisplayModel для отображения в UI" 
+                           FontSize="14" TextColor="{StaticResource Gray500}"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Border>
+        </ScrollView>
+    </Grid>
+</ContentPage>
