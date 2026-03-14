@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="_18.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:_18"
+    xmlns:pages="clr-namespace:_18.Pages"
+    Title="Интернет-магазин">
+
+    <TabBar>
+        <Tab Title="Студенты" Icon="dotnet_bot.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:StudentsPage}"
+                Route="Students" />
+        </Tab>
+        <Tab Title="Магазин" Icon="dotnet_bot.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:StorePage}"
+                Route="Store" />
+        </Tab>
+        <Tab Title="Корзина" Icon="dotnet_bot.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:CartPage}"
+                Route="Cart" />
+        </Tab>
+    </TabBar>
+</Shell>

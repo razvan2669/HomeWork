@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:_18.ViewModels"
+             xmlns:models="clr-namespace:_18.Models"
+             x:Class="_18.Pages.CartPage"
+             x:Name="CartPageRoot"
+             x:DataType="vm:CartViewModel"
+             Title="Корзина"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="0">
+        <Border Grid.Row="0" 
+                BackgroundColor="{StaticResource Tertiary}"
+                Padding="20,16">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="🛍️ Корзина" FontSize="24" FontAttributes="Bold" TextColor="White" />
+                <Label Text="{Binding TotalAmount, StringFormat='Итого: {}{0:N0} ₽'}" 
+                       FontSize="16" TextColor="#E0E0E0" />
+            </VerticalStackLayout>
+        </Border>
+
+        <ScrollView Grid.Row="1" Padding="16">
+            <VerticalStackLayout Spacing="12">
+                <CollectionView ItemsSource="{Binding Items}"
+                               IsVisible="{Binding IsCheckoutVisible}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CartItemDisplay">
+                            <Border Stroke="{StaticResource Gray300}"
+                                    StrokeThickness="1"
+                                    Padding="16"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                                    StrokeShape="RoundRectangle 12">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <Label Grid.Column="0" Text="{Binding ImageUrl}" FontSize="32" VerticalOptions="Center" Margin="0,0,12,0" />
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                        <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" />
+                                        <Label Text="{Binding DisplayText}" />
+                                    </VerticalStackLayout>
+                                    <Button Grid.Column="2"
+                                            Text="🗑️"
+                                            Command="{Binding Source={x:Reference CartPageRoot}, Path=BindingContext.RemoveFromCartAsyncCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#FFEBEE"
+                                            TextColor="#C62828"
+                                            FontSize="18"
+                                            Padding="12,8"
+                                            VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Border x:Name="CheckoutBorder" IsVisible="{Binding IsCheckoutVisible}" Padding="16" Stroke="{StaticResource Gray300}" StrokeThickness="1" StrokeShape="RoundRectangle 12" Margin="0,16,0,0">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Оформление заказа" FontSize="18" FontAttributes="Bold" />
+                        <Entry Placeholder="Ваше имя" Text="{Binding CustomerName}" />
+                        <Entry Placeholder="Email" Text="{Binding CustomerEmail}" Keyboard="Email" />
+                        <Button Text="Оформить заказ" Command="{Binding CreateOrderAsyncCommand}" BackgroundColor="{StaticResource Primary}" TextColor="White" Padding="16,12" />
+                        <Label Text="{Binding StatusMessage}" TextColor="{StaticResource Accent}" FontSize="14" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <VerticalStackLayout Grid.Row="2" IsVisible="{Binding IsCartEmpty}" VerticalOptions="Center" HorizontalOptions="Center" Spacing="16" Padding="24">
+            <Label Text="🛒" FontSize="64" HorizontalOptions="Center" />
+            <Label Text="Корзина пуста" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Добавьте товары из каталога" FontSize="14" TextColor="{StaticResource Gray500}" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

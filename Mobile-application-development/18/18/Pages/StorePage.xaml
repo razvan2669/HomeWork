@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:_18.ViewModels"
+             xmlns:models="clr-namespace:_18.Models"
+             x:Class="_18.Pages.StorePage"
+             x:Name="StorePageRoot"
+             x:DataType="vm:StoreViewModel"
+             Title="Магазин"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+
+    <Grid RowDefinitions="Auto,*" Padding="0">
+        <!-- Заголовок магазина -->
+        <Border Grid.Row="0" 
+                BackgroundColor="{StaticResource Accent}"
+                Padding="20,20"
+                StrokeThickness="0">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="🛒 Каталог товаров" 
+                       FontSize="26" FontAttributes="Bold" 
+                       TextColor="White" />
+                <Label Text="Выберите товар для просмотра" 
+                       FontSize="14" TextColor="#E8E8E8" />
+                <Border Margin="0,12,0,0"
+                        BackgroundColor="#40FFFFFF"
+                        Padding="12,10"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10">
+                    <Entry Placeholder="Поиск..."
+                           Text="{Binding SearchText}"
+                           TextColor="White"
+                           PlaceholderColor="#BBFFFFFF"
+                           BackgroundColor="Transparent"
+                           FontSize="16" />
+                </Border>
+            </VerticalStackLayout>
+        </Border>
+
+        <RefreshView Grid.Row="1" 
+                     Command="{Binding RefreshAsyncCommand}"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Padding="12">
+            <CollectionView x:Name="ProductsList"
+                            ItemsSource="{Binding FilteredProducts}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnProductSelected">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2"
+                                     HorizontalItemSpacing="12"
+                                     VerticalItemSpacing="12" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ProductDisplayModel">
+                        <Border Stroke="{StaticResource Gray300}"
+                                StrokeThickness="1"
+                                Padding="0"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                                StrokeShape="RoundRectangle 16">
+                            <Border.Shadow>
+                                <Shadow Brush="{StaticResource Gray400}"
+                                        Offset="0,4"
+                                        Radius="12"
+                                        Opacity="0.2" />
+                            </Border.Shadow>
+                            <Grid RowDefinitions="Auto,*,Auto" Padding="12">
+                                <Label Grid.Row="0" 
+                                       Text="{Binding ImageUrl}" 
+                                       FontSize="40" 
+                                       HorizontalOptions="Center"
+                                       Margin="0,8,0,4" />
+                                <VerticalStackLayout Grid.Row="1" Spacing="4">
+                                    <Label Text="{Binding Name}" 
+                                           FontSize="14" FontAttributes="Bold"
+                                           MaxLines="2" LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding Description}" 
+                                           FontSize="12"
+                                           TextColor="{StaticResource Gray500}"
+                                           MaxLines="2" LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding FormattedPrice}" 
+                                           TextColor="{StaticResource Accent}"
+                                           FontSize="16" FontAttributes="Bold" />
+                                    <Label Text="{Binding Category}" 
+                                           FontSize="11"
+                                           TextColor="{StaticResource Gray500}" />
+                                </VerticalStackLayout>
+                                <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="8" Margin="0,8,0,0">
+                                    <Button Text="В корзину"
+                                            Command="{Binding Source={x:Reference StorePageRoot}, Path=BindingContext.AddToCartAsyncCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="{StaticResource Accent}"
+                                            TextColor="White"
+                                            FontSize="12"
+                                            Padding="0,8" />
+                                    <Button Grid.Column="1"
+                                            Text="Подробнее"
+                                            Command="{Binding Source={x:Reference StorePageRoot}, Path=BindingContext.GoToProductAsyncCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="{StaticResource Primary}"
+                                            TextColor="White"
+                                            FontSize="12"
+                                            Padding="0,8" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

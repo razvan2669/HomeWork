@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:_18.ViewModels"
+             xmlns:models="clr-namespace:_18.Models"
+             x:Class="_18.Pages.StudentsPage"
+             x:Name="StudentsPageRoot"
+             x:DataType="vm:StudentsViewModel"
+             Title="Студенты"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+
+    <Grid RowDefinitions="Auto,*" Padding="0">
+        <!-- Заголовок -->
+        <Border Grid.Row="0" 
+                BackgroundColor="{StaticResource Primary}"
+                Padding="20,16">
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout VerticalOptions="Center">
+                    <Label Text="База студентов" 
+                           FontSize="24" FontAttributes="Bold" 
+                           TextColor="White" />
+                    <Label Text="CRUD с MVVM" 
+                           FontSize="14" TextColor="#E0E0E0" />
+                </VerticalStackLayout>
+                <Button Grid.Column="1" 
+                        Text="➕ Добавить" 
+                        Command="{Binding ShowAddFormCommand}"
+                        BackgroundColor="#FFFFFF"
+                        TextColor="{StaticResource Primary}"
+                        VerticalOptions="Center"
+                        Padding="16,10" />
+            </Grid>
+        </Border>
+
+        <!-- Форма добавления/редактирования -->
+        <Border Grid.Row="1" 
+                IsVisible="{Binding IsFormVisible}"
+                Padding="20" Margin="16"
+                Stroke="{StaticResource Primary}" StrokeThickness="2"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                StrokeShape="RoundRectangle 16">
+            <VerticalStackLayout Spacing="12">
+                <Label Text="{Binding FormTitle}" 
+                       FontSize="18" FontAttributes="Bold" />
+                <Entry Placeholder="Имя" Text="{Binding FirstName, Mode=TwoWay}" />
+                <Entry Placeholder="Фамилия" Text="{Binding LastName, Mode=TwoWay}" />
+                <Entry Placeholder="Email" Text="{Binding Email, Mode=TwoWay}" Keyboard="Email" />
+                <HorizontalStackLayout Spacing="12">
+                    <Button x:Name="SaveBtn" Text="Сохранить" Command="{Binding SaveFormAsyncCommand}" Clicked="OnSaveClicked" BackgroundColor="{StaticResource Primary}" TextColor="White" />
+                    <Button Text="Отмена" Command="{Binding CancelEditCommand}" BackgroundColor="{StaticResource Gray300}" />
+                </HorizontalStackLayout>
+                <Label Text="{Binding StatusMessage}" TextColor="{StaticResource Accent}" FontSize="14" />
+            </VerticalStackLayout>
+        </Border>
+
+        <ScrollView Grid.Row="1" Padding="16" IsVisible="{Binding ShowStudentList}">
+            <VerticalStackLayout Spacing="12" BindableLayout.ItemsSource="{Binding Students}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="models:StudentModel">
+                        <Border Stroke="{StaticResource Gray300}"
+                                StrokeThickness="1"
+                                Padding="16"
+                                Margin="0,0,0,8"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                                StrokeShape="RoundRectangle 12">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto">
+                                <Label Grid.Row="0" Grid.ColumnSpan="2"
+                                       Text="{Binding FullName}"
+                                       FontSize="18" FontAttributes="Bold" />
+                                <Label Grid.Row="1" Grid.ColumnSpan="2"
+                                       Text="{Binding Email}"
+                                       FontSize="14"
+                                       TextColor="{StaticResource Gray500}" />
+                                <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="8" Margin="0,12,0,0">
+                                    <Button Text="Изменить" 
+                                            Clicked="OnEditClicked"
+                                            BackgroundColor="{StaticResource Secondary}"
+                                            TextColor="{StaticResource Primary}"
+                                            Padding="12,8" />
+                                    <Button Text="Удалить" 
+                                            Clicked="OnDeleteClicked"
+                                            BackgroundColor="#FFEBEE"
+                                            TextColor="#C62828"
+                                            Padding="12,8" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Пустое состояние -->
+        <VerticalStackLayout Grid.Row="1" 
+                             IsVisible="{Binding ShowEmptyState}"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             Spacing="16">
+            <Label Text="📚" FontSize="64" HorizontalOptions="Center" />
+            <Label Text="Нет студентов" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Нажмите «Добавить», чтобы добавить первого студента" 
+                   FontSize="14" TextColor="{StaticResource Gray500}" 
+                   HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+            <Button Text="Добавить студента" 
+                    Command="{Binding ShowAddFormCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    HorizontalOptions="Center"
+                    Padding="24,12" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
