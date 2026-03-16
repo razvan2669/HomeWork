@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Аквилсjs3</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    :root {
+      --bg: #050b0a;
+      --bg-alt: #071614;
+      --emerald: #2ecc71;
+      --emerald-soft: #27ae60;
+      --emerald-dark: #1f7a4a;
+      --text-main: #ecf0f1;
+      --text-muted: #95a5a6;
+      --border: #1b2c28;
+      --accent: #00ffc3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 0 0, #093026 0, #050b0a 55%, #020504 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 48px;
+    }
+
+    .frame {
+      width: 100%;
+      max-width: 1100px;
+      background: linear-gradient(135deg, rgba(46, 204, 113, 0.08), rgba(3, 10, 9, 0.95));
+      border-radius: 18px;
+      border: 1px solid rgba(0, 255, 195, 0.3);
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.8),
+        0 0 25px rgba(0, 255, 195, 0.25),
+        0 40px 80px rgba(0, 0, 0, 0.9);
+      padding: 24px 28px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 0, rgba(0, 255, 195, 0.12), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(46, 204, 113, 0.16), transparent 55%);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 255, 195, 0.7);
+      background:
+        radial-gradient(circle at 30% 0, rgba(0, 255, 195, 0.35), transparent 55%),
+        radial-gradient(circle at 70% 100%, rgba(46, 204, 113, 0.4), transparent 55%);
+      box-shadow: 0 0 18px rgba(0, 255, 195, 0.7);
+      position: relative;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 9px 7px;
+      border-radius: 8px;
+      border-top: 2px solid rgba(0, 0, 0, 0.6);
+      border-bottom: 2px solid rgba(0, 0, 0, 0.6);
+      border-left: 2px solid rgba(0, 255, 195, 0.8);
+      border-right: 2px solid rgba(46, 204, 113, 0.9);
+    }
+
+    .title {
+      font-size: 26px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .title span {
+      color: var(--accent);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .tag {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 255, 195, 0.45);
+      background: rgba(3, 26, 19, 0.8);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(0, 255, 195, 0.9);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .card {
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at 0 0, rgba(46, 204, 113, 0.09), rgba(7, 22, 20, 0.96));
+      padding: 16px 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 255, 195, 0.12), transparent 40%);
+      mix-blend-mode: screen;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #e8f8f3;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 255, 195, 0.5);
+      color: var(--text-muted);
+    }
+
+    .card-body {
+      margin-top: 4px;
+    }
+
+    .card-body p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .code-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--emerald);
+      margin-bottom: 6px;
+    }
+
+    .panel {
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      background: radial-gradient(circle at 0 0, rgba(0, 0, 0, 0.9), rgba(1, 5, 4, 0.95));
+      padding: 10px 12px 12px;
+    }
+
+    .panel + .panel {
+      margin-top: 8px;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, rgba(0, 255, 195, 0.2), rgba(46, 204, 113, 0.15));
+    }
+
+    #paragraph {
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+
+    #paragraph:hover {
+      transform: translateY(-1px);
+    }
+
+    #changeTextButton {
+      margin-top: 8px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 255, 195, 0.65);
+      background: radial-gradient(circle at 0 0, rgba(0, 255, 195, 0.18), rgba(3, 12, 9, 0.95));
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    #changeTextButton:hover {
+      box-shadow: 0 0 18px rgba(0, 255, 195, 0.55);
+    }
+
+    #registrationForm {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    #registrationForm label {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+    }
+
+    #registrationForm input {
+      margin-top: 2px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(22, 160, 133, 0.8);
+      background: rgba(2, 10, 8, 0.96);
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+    }
+
+    #registrationForm input:focus {
+      box-shadow: 0 0 0 1px rgba(0, 255, 195, 0.7);
+    }
+
+    .error-field {
+      border-color: #e74c3c !important;
+      box-shadow: 0 0 0 1px rgba(231, 76, 60, 0.6);
+    }
+
+    #registrationForm button {
+      margin-top: 6px;
+      align-self: flex-start;
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 255, 195, 0.7);
+      background: linear-gradient(135deg, var(--emerald-soft), var(--emerald-dark));
+      color: #fafffd;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+    }
+
+    #registrationForm button:hover {
+      box-shadow: 0 0 18px rgba(46, 204, 113, 0.7);
+    }
+
+    #validationErrors {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #f39c12;
+    }
+
+    #validationErrors ul {
+      padding-left: 18px;
+    }
+
+    #animatedDiv {
+      width: 200px;
+      height: 100px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 255, 195, 0.7);
+      padding: 10px 12px;
+      font-size: 16px;
+      background: radial-gradient(circle at 0 0, rgba(0, 255, 195, 0.16), rgba(1, 6, 5, 0.96));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 0 16px rgba(0, 255, 195, 0.35);
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 11px;
+      text-align: right;
+      color: var(--text-muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 720px) {
+      .frame {
+        padding: 18px 16px 24px;
+      }
+
+      .title {
+        font-size: 22px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="frame">
+    <header>
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="title"><span>Аквилс</span> • jQuery - JS 3</div>
+          <div class="subtitle">Практические задания №3 по библиотеке jQuery </div>
+        </div>
+      </div>
+      <div class="tag">
+        <span class="tag-dot"></span>
+        Активный сеанс
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card" id="task1">
+        <div class="card-header">
+          <div class="card-title">01 • Dom &amp; события</div>
+          <div class="badge">Базовые операции</div>
+        </div>
+        <div class="card-body">
+          <p>Работа с заголовком, абзацем и кнопкой: изменение текста, подсветка и корректировка размера шрифта с помощью jQuery.</p>
+          <div class="code-label">Интерактивная панель</div>
+          <div class="panel">
+            <h1 id="header">Заголовок</h1>
+            <p id="paragraph">Это простой абзац. Кликни, чтобы подсветить, двойной клик — изменить размер шрифта.</p>
+            <button id="changeTextButton">Изменить текст</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="task2">
+        <div class="card-header">
+          <div class="card-title">02 • Валидация формы</div>
+          <div class="badge">Регистрация</div>
+        </div>
+        <div class="card-body">
+          <p>Проверка имени, электронной почты и пароля перед отправкой формы. Все проверки выполняются на стороне клиента с помощью jQuery.</p>
+          <div class="code-label">Форма регистрации</div>
+          <div class="panel">
+            <form id="registrationForm">
+              <label for="name">Имя</label>
+              <input type="text" name="name" id="name" autocomplete="off">
+
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" autocomplete="off">
+
+              <label for="password">Пароль</label>
+              <input type="password" name="password" id="password">
+
+              <button type="submit">Зарегистрироваться</button>
+            </form>
+            <div id="validationErrors"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="task3">
+        <div class="card-header">
+          <div class="card-title">03 • Анимация</div>
+          <div class="badge">Hover &amp; Fade</div>
+        </div>
+        <div class="card-body">
+          <p>Анимация изменения размеров блока при наведении и плавное исчезновение/появление текста по клику.</p>
+          <div class="code-label">Анимированный блок</div>
+          <div class="panel" style="display:flex;justify-content:center;">
+            <div id="animatedDiv"><span class="inner-text">Наведи курсор и кликни по мне</span></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="footer-note">Аквилс • jQuery</div>
+  </main>
+
+  <script>
+    $(function () {
+      $("#changeTextButton").on("click", function () {
+        $("#header").text("Текст заголовка изменён с помощью jQuery, вот это фокусы");
+      });
+
+      $("#paragraph").on("click", function () {
+        $(this).toggleClass("highlight");
+      });
+
+      $("#paragraph").on("dblclick", function () {
+        const currentSize = parseInt($(this).css("font-size"), 10) || 16;
+        const newSize = currentSize === 16 ? 22 : 16;
+        $(this).css("font-size", newSize + "px");
+      });
+
+      $("#registrationForm").on("submit", function (event) {
+        event.preventDefault();
+
+        $("#validationErrors").empty();
+        $("#registrationForm input").removeClass("error-field");
+
+        const name = $("#name").val().trim();
+        const email = $("#email").val().trim();
+        const password = $("#password").val().trim();
+
+        const errors = [];
+
+        if (name.length < 3) {
+          errors.push("Имя должно содержать минимум три символа.");
+          $("#name").addClass("error-field");
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+          errors.push("Введите корректный адрес электронной почты.");
+          $("#email").addClass("error-field");
+        }
+
+        if (password.length < 6) {
+          errors.push("Пароль должен быть длиной хотя бы шесть символов.");
+          $("#password").addClass("error-field");
+        }
+
+        if (errors.length > 0) {
+          const list = $("<ul></ul>");
+          errors.forEach(function (error) {
+            list.append($("<li></li>").text(error));
+          });
+          $("#validationErrors").append(list);
+        } else {
+          $("#validationErrors").css("color", "#2ecc71").text("Форма успешно отправлена!");
+        }
+      });
+      const $div = $("#animatedDiv");
+
+      $div.hover(
+        function () {
+          $(this).stop().animate(
+            {
+              width: "240px",
+              height: "120px",
+              fontSize: "18px"
+            },
+            260
+          );
+        },
+        function () {
+          $(this).stop().animate(
+            {
+              width: "200px",
+              height: "100px",
+              fontSize: "16px"
+            },
+            260
+          );
+        }
+      );
+
+      $div.on("click", function () {
+        $(this).find(".inner-text").fadeToggle(260);
+      });
+    });
+  </script>
+</body>
+</html>
