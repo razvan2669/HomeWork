@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>выполненно практ 2</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .menu {
+      margin-bottom: 30px;
+    }
+
+    .menu-title {
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #3498db;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .menu-list {
+      margin-top: 10px;
+      padding-left: 0;
+      list-style: none;
+      display: none; 
+      border: 1px solid #3498db;
+      max-width: 200px;
+    }
+
+    .menu-list li {
+      padding: 8px 12px;
+      background-color: #ecf0f1;
+      border-bottom: 1px solid #bdc3c7;
+    }
+
+    .menu-list li:last-child {
+      border-bottom: none;
+    }
+
+    .image-container {
+      margin-bottom: 30px;
+    }
+
+    .zoom-image {
+      width: 200px;
+      transition: transform 0.3s ease;
+      border-radius: 4px;
+    }
+
+    .feedback-form {
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feedback-form textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .feedback-form button {
+      align-self: flex-start;
+      padding: 8px 14px;
+      background-color: #27ae60;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .feedback-result {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <h1>практ 2</h1>
+
+  <section class="menu">
+    <h2>1. Выпадающее меню</h2>
+    <div class="menu-title">Меню</div>
+    <ul class="menu-list">
+      <li>баобаб 1</li>
+      <li>баобаб 2</li>
+      <li>баобаб 3</li>
+    </ul>
+  </section>
+
+  <section class="image-container">
+    <h2>2. Увеличение картинки</h2>
+    <img
+      class="zoom-image"
+      src="C:\Users\razva\Documents\GitHub\HomeWork\Js\bmwe60fara.jpg"
+      alt="Моя фотография"
+    >
+  </section>
+
+  <section>
+    <h2>3. Форма обратной связи</h2>
+    <form class="feedback-form">
+      <label for="message">Ваше сообщение:</label>
+      <textarea id="message" name="message" required></textarea>
+      <button type="submit">Отправить</button>
+    </form>
+    <div class="feedback-result" id="feedbackResult"></div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
